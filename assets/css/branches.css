@@ -1,0 +1,131 @@
+/* Main layout styling */
+.main {
+  font-family: Arial, sans-serif;
+}
+
+.page-title {
+  text-align: center;
+  color: white;
+  padding: 60px 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.page-title h1 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+}
+
+.page-title p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.breadcrumbs ol {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  padding: 0;
+}
+
+.breadcrumbs ol li {
+  font-size: 0.9rem;
+  color: white;
+}
+
+.breadcrumbs ol li + li:before {
+  content: "›";
+  margin: 0 8px;
+}
+
+/* Entry header styling */
+.entry-header {
+  text-align: center;
+  margin: 30px 0;
+}
+
+.entry-title {
+  font-size: 2rem;
+}
+
+/* Contact information layout */
+.entry-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 20px;
+}
+
+.one_half {
+  flex: 1 1 calc(50% - 20px);
+  box-sizing: border-box;
+}
+
+.contactinfo-title {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.contactdetail {
+  font-size: 1rem;
+  color: #666;
+}
+
+.contactdetail p {
+  margin: 5px 0;
+}
+
+/* Map iframe styling */
+.one_half iframe {
+  width: 100%;
+  height: 200px;
+  border: 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .page-title h1 {
+    font-size: 2rem;
+  }
+
+  .one_half {
+    flex: 1 1 100%;
+  }
+
+  .entry-title {
+    font-size: 1.75rem;
+  }
+
+  .contactinfo-title {
+    font-size: 1.25rem;
+  }
+
+  .contactdetail p {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title h1 {
+    font-size: 1.75rem;
+  }
+
+  .page-title p {
+    font-size: 0.9rem;
+  }
+
+  .entry-title {
+    font-size: 1.5rem;
+  }
+
+  .contactinfo-title {
+    font-size: 1.2rem;
+  }
+
+  .contactdetail p {
+    font-size: 0.9rem;
+  }
+}

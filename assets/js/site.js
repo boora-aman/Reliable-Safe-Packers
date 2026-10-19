@@ -30,6 +30,7 @@
     burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
     d.body.classList.toggle('lock', open);
+    var u = burger.querySelector('use'); if (u) u.setAttribute('href', open ? '#i-close' : '#i-menu');
   }
   if (burger) {
     burger.addEventListener('click', function () { setMenu(!nav.classList.contains('open')); });

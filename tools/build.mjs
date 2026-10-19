@@ -124,7 +124,7 @@ function footer() {
 <p><a class="btn btn-cta" href="tel:${S.phone}">${ico('phone')} Call ${S.phoneShow}</a></p></div>
 <div><h4>Services</h4><ul>${SERVICES.map((s) => `<li><a href="${svcPath(s)}">${e(s.nav)}</a></li>`).join('')}</ul></div>
 <div><h4>Areas in Dehradun</h4><ul>${AREAS.slice(0, 8).map((a) => `<li><a href="${areaPath(a)}">${e(a.name)}</a></li>`).join('')}<li><a href="branches.html">More areas &amp; routes</a></li></ul></div>
-<div><h4>Contact</h4><address class="addr" style="font-style:normal"><p>${e(S.street)}, ${S.city} (U.K.) ${S.zip}</p>
+<div class="f-contact"><h4>Contact</h4><address class="addr" style="font-style:normal"><p>${e(S.street)}, ${S.city} (U.K.) ${S.zip}</p>
 <p>${ico('phone')} <a href="tel:${S.phone}">${S.phoneShow}</a><br>${ico('mail')} <a href="mailto:${S.email}">${S.email}</a></p><p>${e(S.hours)}</p></address>
 <ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy-policy.html">Privacy policy</a></li></ul></div>
 </div>

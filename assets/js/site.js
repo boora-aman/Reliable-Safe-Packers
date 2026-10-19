@@ -3,6 +3,24 @@
   'use strict';
   var d = document;
 
+  /* ---- sticky header shadow ---- */
+  var hdr = d.querySelector('.header');
+  if (hdr) {
+    var onScroll = function () { hdr.classList.toggle('stuck', window.scrollY > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  }
+
+  /* ---- scroll reveal (below-the-fold blocks only) ---- */
+  if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+    }, { rootMargin: '0px 0px -8% 0px' });
+    Array.prototype.forEach.call(d.querySelectorAll('.sec-head,.card,.steps li,.split>*,.faq details,.band .wrap'), function (el) {
+      if (el.getBoundingClientRect().top < window.innerHeight) return;
+      el.classList.add('rv'); io.observe(el);
+    });
+  }
+
   /* ---- mobile menu ---- */
   var burger = d.getElementById('burger');
   var nav = d.getElementById('nav');
@@ -89,7 +107,7 @@
         .then(function (res) {
           if (!res.ok) throw new Error(res.j.error || 'fail');
           fire('lead_submit', { page: location.pathname, service: body.service });
-          location.href = '/thank-you.html';
+          location.href = 'thank-you.html';
         })
         .catch(function () {
           btn.disabled = false; btn.textContent = label;

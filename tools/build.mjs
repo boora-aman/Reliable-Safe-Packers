@@ -37,7 +37,7 @@ const ico = (n, c = '') => `<svg class="ico ${c}" aria-hidden="true"><use href="
 const sprite = `<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>${Object.entries(ICONS).map(([k, v]) => `<symbol id="i-${k}" viewBox="0 0 24 24">${v}</symbol>`).join('')}</defs></svg>`;
 
 const LOGO_ICON = '<svg viewBox="0 0 64 64" aria-hidden="true"><path d="M32 3 57 11v21c0 15-10.5 25-25 29C17.5 57 7 47 7 32V11z" fill="#0a2540"/><path d="M32 8.5 52 15v17c0 12-8.5 20.5-20 24.5C20.5 52.5 12 44 12 32V15z" fill="#12365c"/><rect x="15" y="22" width="19" height="14" rx="2" fill="#fff"/><path d="M36 26h7.5l5.5 6v4H36z" fill="#fff"/><path d="M39 28.5h3.5l3 3.3H39z" fill="#12365c"/><path d="M14 36h35" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/><circle cx="23" cy="38.5" r="4" fill="#e0560d" stroke="#12365c" stroke-width="2"/><circle cx="42" cy="38.5" r="4" fill="#e0560d" stroke="#12365c" stroke-width="2"/><path d="m22 47 6 4.5L42 44" fill="none" stroke="#e0560d" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-const brand = `<a class="brand" href="/" aria-label="${e(S.name)} home">${LOGO_ICON}<span><b>Reliable Safe</b><small>Packers &amp; Movers</small></span></a>`;
+const brand = `<a class="brand" href="index.html" aria-label="${e(S.name)} home">${LOGO_ICON}<span><b>Reliable Safe</b><small>Packers &amp; Movers</small></span></a>`;
 
 /* ---------- paths ---------- */
 const areaPath = (a) => `packers-movers-${a.slug}-dehradun.html`;
@@ -46,7 +46,7 @@ const svcPath = (s) => `${s.slug}.html`;
 const abs = (p) => `${S.url}/${p === 'index.html' ? '' : p}`;
 
 /* ---------- shared pieces ---------- */
-function head({ title, desc, path, noindex = false, schema = [], ogImage = 'assets/img/og-image.jpg' }) {
+function head({ title, desc, path, noindex = false, schema = [], ogImage = 'assets/img/og-image.jpg', preload = '' }) {
   const url = abs(path);
   return `<!DOCTYPE html>
 <html lang="en-IN">
@@ -63,12 +63,14 @@ function head({ title, desc, path, noindex = false, schema = [], ogImage = 'asse
 <meta property="og:title" content="${e(title)}"><meta property="og:description" content="${e(desc)}"><meta property="og:url" content="${url}">
 <meta property="og:image" content="${S.url}/${ogImage}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/assets/img/icon-192.png" sizes="192x192" type="image/png">
-<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
-<link rel="manifest" href="/site.webmanifest">
-<link rel="preload" href="/assets/css/site.css" as="style">
-<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/img/icon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="manifest" href="site.webmanifest">
+<script>document.documentElement.className='js'</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/css/site.css">${preload}
 ${schema.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n')}
 </head>`;
 }
@@ -103,12 +105,12 @@ ${brand}
 <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="nav">${ico('menu')}</button>
 </div>
 <nav class="nav" id="nav" aria-label="Main"><ul>
-<li><a href="/"${c('index.html')}>Home</a></li>
-<li class="dd"><details><summary>Services</summary><div class="sub two">${SERVICES.map((s) => `<a href="/${svcPath(s)}"${c(svcPath(s))}>${e(s.nav)}</a>`).join('')}<a href="/services.html"><b>All services</b></a></div></details></li>
-<li class="dd"><details><summary>Areas</summary><div class="sub two">${AREAS.map((a) => `<a href="/${areaPath(a)}"${c(areaPath(a))}>${e(a.name)}</a>`).join('')}<a href="/branches.html"><b>All areas &amp; routes</b></a></div></details></li>
-<li><a href="/about.html"${c('about.html')}>About</a></li>
-<li><a href="/branches.html"${c('branches.html')}>Service Areas</a></li>
-<li><a href="/contact.html"${c('contact.html')}>Contact</a></li>
+<li><a href="index.html"${c('index.html')}>Home</a></li>
+<li class="dd"><details><summary>Services</summary><div class="sub two">${SERVICES.map((s) => `<a href="${svcPath(s)}"${c(svcPath(s))}>${e(s.nav)}</a>`).join('')}<a href="services.html"><b>All services</b></a></div></details></li>
+<li class="dd"><details><summary>Areas</summary><div class="sub two">${AREAS.map((a) => `<a href="${areaPath(a)}"${c(areaPath(a))}>${e(a.name)}</a>`).join('')}<a href="branches.html"><b>All areas &amp; routes</b></a></div></details></li>
+<li><a href="about.html"${c('about.html')}>About</a></li>
+<li><a href="branches.html"${c('branches.html')}>Service Areas</a></li>
+<li><a href="contact.html"${c('contact.html')}>Contact</a></li>
 </ul>
 <div class="nav-cta"><a class="btn btn-cta" href="tel:${S.phone}">${ico('phone')} Call ${S.phoneShow}</a><a class="btn btn-wa" href="https://wa.me/${S.wa}?text=${encodeURIComponent('Hi, I need a moving quote.')}" target="_blank" rel="noopener">${ico('wa')} WhatsApp</a></div>
 </nav>
@@ -120,11 +122,11 @@ function footer() {
 <div class="fgrid">
 <div class="f-about">${brand}<p style="margin-top:12px">Professional packers and movers in Dehradun for home, office, car and bike shifting, locally and across India.</p>
 <p><a class="btn btn-cta" href="tel:${S.phone}">${ico('phone')} Call ${S.phoneShow}</a></p></div>
-<div><h4>Services</h4><ul>${SERVICES.map((s) => `<li><a href="/${svcPath(s)}">${e(s.nav)}</a></li>`).join('')}</ul></div>
-<div><h4>Areas in Dehradun</h4><ul>${AREAS.slice(0, 8).map((a) => `<li><a href="/${areaPath(a)}">${e(a.name)}</a></li>`).join('')}<li><a href="/branches.html">More areas &amp; routes</a></li></ul></div>
+<div><h4>Services</h4><ul>${SERVICES.map((s) => `<li><a href="${svcPath(s)}">${e(s.nav)}</a></li>`).join('')}</ul></div>
+<div><h4>Areas in Dehradun</h4><ul>${AREAS.slice(0, 8).map((a) => `<li><a href="${areaPath(a)}">${e(a.name)}</a></li>`).join('')}<li><a href="branches.html">More areas &amp; routes</a></li></ul></div>
 <div><h4>Contact</h4><address class="addr" style="font-style:normal"><p>${e(S.street)}, ${S.city} (U.K.) ${S.zip}</p>
 <p>${ico('phone')} <a href="tel:${S.phone}">${S.phoneShow}</a><br>${ico('mail')} <a href="mailto:${S.email}">${S.email}</a></p><p>${e(S.hours)}</p></address>
-<ul><li><a href="/about.html">About us</a></li><li><a href="/contact.html">Contact</a></li><li><a href="/privacy-policy.html">Privacy policy</a></li></ul></div>
+<ul><li><a href="about.html">About us</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy-policy.html">Privacy policy</a></li></ul></div>
 </div>
 <div class="copy"><span>&copy; ${S.year} ${e(S.name)}. All rights reserved.</span><span>Dehradun, Uttarakhand, India</span></div>
 </div></footer>
@@ -134,7 +136,7 @@ function footer() {
 <a class="q" href="#quote">${ico('tag')}Free Quote</a>
 </div>
 <a class="fab" href="https://wa.me/${S.wa}?text=${encodeURIComponent('Hi, I need a moving quote.')}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">${ico('wa')}</a>
-<script src="/assets/js/site.js" defer></script>`;
+<script src="assets/js/site.js" defer></script>`;
 }
 
 const SERVICE_OPTS = ['House Shifting', 'Office Relocation', 'Local Shifting', 'Long Distance Move', 'Car Transport', 'Bike Transport', 'Packing Only', 'Warehouse / Storage', 'Other'];
@@ -157,20 +159,20 @@ ${full ? `<div class="fld"><label for="${id}-m">Details (optional)</label><texta
 </form></div>`;
 }
 
-const crumbs = (items) => `<nav class="crumbs" aria-label="Breadcrumb">${items.map((c, i) => (i === items.length - 1 ? `<span aria-current="page" style="margin:0">${e(c[0])}</span>` : `<a href="/${c[1] === 'index.html' ? '' : c[1]}">${e(c[0])}</a><span>/</span>`)).join('')}</nav>`;
+const crumbs = (items) => `<nav class="crumbs" aria-label="Breadcrumb">${items.map((c, i) => (i === items.length - 1 ? `<span aria-current="page" style="margin:0">${e(c[0])}</span>` : `<a href="${c[1]}">${e(c[0])}</a><span>/</span>`)).join('')}</nav>`;
 
 const faqHtml = (faqs, h = 'Frequently asked questions') => `<div class="faq"><h2>${e(h)}</h2>${faqs.map(([q, a]) => `<details><summary>${e(q)}</summary><p>${e(a)}</p></details>`).join('')}</div>`;
 
-const band = (t = 'Ready to move? Get your free quote today', p = 'Call or WhatsApp us. We reply fast and quote clearly.') => `<section class="band"><div class="wrap"><h2>${e(t)}</h2><p>${e(p)}</p><div class="row"><a class="btn btn-line" href="tel:${S.phone}">${ico('phone')} Call ${S.phoneShow}</a><a class="btn btn-wa" href="https://wa.me/${S.wa}?text=${encodeURIComponent('Hi, I need a moving quote.')}" target="_blank" rel="noopener">${ico('wa')} WhatsApp Us</a></div></div></section>`;
+const band = (t = 'Ready to move? Get your free quote today', p = 'Call or WhatsApp us. We reply fast and quote clearly.') => `<section class="band"><img src="assets/img/opt/cta.webp" alt="" width="1400" height="934" loading="lazy" decoding="async"><div class="wrap"><h2>${e(t)}</h2><p>${e(p)}</p><div class="row"><a class="btn btn-cta" href="tel:${S.phone}">${ico('phone')} Call ${S.phoneShow}</a><a class="btn btn-wa" href="https://wa.me/${S.wa}?text=${encodeURIComponent('Hi, I need a moving quote.')}" target="_blank" rel="noopener">${ico('wa')} WhatsApp Us</a></div></div></section>`;
 
 const pageHero = ({ trail, h1, lead }) => `<section class="phero"><div class="wrap">${crumbs(trail)}<h1>${e(h1)}</h1><p>${e(lead)}</p>
 <div class="row"><a class="btn btn-cta" href="tel:${S.phone}">${ico('phone')} Call Now</a><a class="btn btn-wa" href="https://wa.me/${S.wa}?text=${encodeURIComponent('Hi, I need a moving quote.')}" target="_blank" rel="noopener">${ico('wa')} WhatsApp</a></div></div></section>`;
 
-const sideBox = (title, items) => `<div class="box"><h3>${e(title)}</h3><ul>${items.map(([l, h]) => `<li><a href="/${h}">${e(l)}</a></li>`).join('')}</ul></div>`;
+const sideBox = (title, items) => `<div class="box"><h3>${e(title)}</h3><ul>${items.map(([l, h]) => `<li><a href="${h}">${e(l)}</a></li>`).join('')}</ul></div>`;
 const contactBox = () => `<div class="box"><h3>Talk to us</h3><ul><li>${ico('phone')} <a href="tel:${S.phone}"><b>${S.phoneShow}</b></a></li><li>${ico('mail')} <a href="mailto:${S.email}">${S.email}</a></li><li>${ico('pin')} ${e(S.street)}, ${S.city} ${S.zip}</li><li>${ico('clock')} ${e(S.hours)}</li></ul></div>`;
 
-function emit(path, { title, desc, cur, body, schema = [], noindex = false, priority = 0.6 }) {
-  const html = `${head({ title, desc, path, noindex, schema: [orgSchema(), siteSchema(), ...schema] })}
+function emit(path, { title, desc, cur, body, schema = [], noindex = false, priority = 0.6, preload = '' }) {
+  let html = `${head({ title, desc, path, noindex, preload, schema: [orgSchema(), siteSchema(), ...schema] })}
 <body>
 ${sprite}
 ${header(cur || path)}
@@ -181,14 +183,16 @@ ${footer()}
 </body>
 </html>
 `;
+  // 404 is served on any URL depth, so it needs root-absolute asset/link paths
+  if (path === '404.html') html = html.replace(/(href|src)="(?!https?:|\/|#|mailto:|tel:|data:|\$)([^"]+)"/g, '$1="/$2"');
   writeFileSync(join(ROOT, path), html);
   if (!noindex) pages.push({ path, priority });
 }
 
 const reviewCards = () => `<div class="grid c3 reviews">${REVIEWS.map(([n, t]) => `<div class="card"><div class="stars" aria-label="5 out of 5 stars">★★★★★</div><p>&ldquo;${e(t)}&rdquo;</p><div class="who"><span class="av">${e(n[0])}</span>${e(n)}</div></div>`).join('')}</div>`;
-const chips = (items) => `<ul class="chips">${items.map(([l, h]) => `<li><a href="/${h}">${e(l)}</a></li>`).join('')}</ul>`;
+const chips = (items) => `<ul class="chips">${items.map(([l, h]) => `<li><a href="${h}">${e(l)}</a></li>`).join('')}</ul>`;
 const svcLinks = () => SERVICES.map((s) => [s.nav, svcPath(s)]);
-const img = (n, alt, w, h, lazy = true) => `<img src="/assets/img/opt/${n}.webp" alt="${e(alt)}" width="${w}" height="${h}"${lazy ? ' loading="lazy" decoding="async"' : ''}>`;
+const img = (n, alt, w, h, lazy = true) => `<img src="assets/img/opt/${n}.webp" alt="${e(alt)}" width="${w}" height="${h}"${lazy ? ' loading="lazy" decoding="async"' : ''}>`;
 
 /* =============== HOME =============== */
 {
@@ -198,22 +202,24 @@ const img = (n, alt, w, h, lazy = true) => `<img src="/assets/img/opt/${n}.webp"
     desc: 'Reliable Safe Packers & Movers: trusted house shifting, office relocation, car and bike transport in Dehradun and across India. Free quote. Call 87557 22118.',
     priority: 1.0,
     schema: [faqSchema(faqs)],
-    body: `<section class="hero"><div class="hero-bg" aria-hidden="true"></div><div class="wrap hero-grid">
-<div><span class="kicker">Dehradun &bull; 15+ years of experience</span>
-<h1>Trusted Packers and Movers in Dehradun</h1>
-<p class="lead">Safe house shifting, office relocation and car &amp; bike transport. Trained crew, quality packing, on-time delivery.</p>
-<ul class="ticks"><li>${ico('check')} Free home survey and clear fixed quote</li><li>${ico('check')} Careful packing with quality material</li><li>${ico('check')} Local, Delhi NCR and all-India moves</li></ul>
-<div class="hero-cta"><a class="btn btn-cta" href="tel:${S.phone}">${ico('phone')} Call Now</a><a class="btn btn-wa" href="https://wa.me/${S.wa}?text=${encodeURIComponent('Hi, I need a moving quote.')}" target="_blank" rel="noopener">${ico('wa')} WhatsApp</a></div></div>
+    preload: '<link rel="preload" as="image" href="assets/img/opt/hero-m.webp" imagesrcset="assets/img/opt/hero-m.webp 800w, assets/img/opt/hero.webp 1400w" imagesizes="100vw" fetchpriority="high">',
+    body: `<section class="hero"><img class="hero-img" src="assets/img/opt/hero-m.webp" srcset="assets/img/opt/hero-m.webp 800w, assets/img/opt/hero.webp 1400w" sizes="100vw" width="1400" height="934" alt="Movers loading a truck for a family in Dehradun" fetchpriority="high"><div class="wrap hero-grid">
+<div><span class="pill"><i></i> Dehradun &bull; Open 9 AM - 9 PM &bull; 24/7 support</span>
+<h1>Safe &amp; Trusted <span class="hl">Packers and Movers</span> in Dehradun</h1>
+<p class="lead">House shifting, office relocation, car &amp; bike transport. Trained crew, quality packing, on-time delivery. Free quote in minutes.</p>
+<ul class="ticks"><li>${ico('check')} Free home survey and fixed quote</li><li>${ico('check')} Careful packing with quality material</li><li>${ico('check')} Local, Delhi NCR and all-India moves</li></ul>
+<div class="hero-cta"><a class="btn btn-cta" href="tel:${S.phone}">${ico('phone')} Call Now</a><a class="btn btn-wa" href="https://wa.me/${S.wa}?text=${encodeURIComponent('Hi, I need a moving quote.')}" target="_blank" rel="noopener">${ico('wa')} WhatsApp</a></div>
+<div class="stats"><div><b>15+</b><span>Years experience</span></div><div><b>24/7</b><span>Support line</span></div><div><b>All India</b><span>Relocation</span></div></div></div>
 <div>${qform({ title: 'Get a Free Quote', sub: 'Fill in 30 seconds. We call you back fast.' })}</div>
 </div></section>
 <section class="trust"><div class="wrap"><ul>
 <li>${ico('shield')} Safe &amp; careful handling</li><li>${ico('clock')} On-time delivery</li><li>${ico('tag')} Transparent pricing</li><li>${ico('phone')} 24/7 support line</li></ul></div></section>
 
 <section class="sec"><div class="wrap"><div class="sec-head center"><span class="eyebrow">Our services</span><h2>Everything for a smooth move</h2><p>From one room to a full office, choose the service you need.</p></div>
-<div class="grid c3">${SERVICES.map((s) => `<a class="card" href="/${svcPath(s)}"><div class="ci">${ico(s.icon)}</div><h3>${e(s.nav)}</h3><p>${e(s.short)}</p><span class="more">Learn more &rarr;</span></a>`).join('')}</div></div></section>
+<div class="grid c3">${SERVICES.map((s) => `<a class="card img" href="${svcPath(s)}"><div class="ph">${img(s.img, s.imgAlt, 800, 500)}<span class="tag">${ico(s.icon)}</span></div><div class="cb"><h3>${e(s.nav)}</h3><p>${e(s.short)}</p><span class="more">Learn more &rarr;</span></div></a>`).join('')}</div></div></section>
 
 <section class="sec soft"><div class="wrap split">
-<div>${img('crew', 'Uniformed Reliable Safe Packers crew member with wrapped furniture', 900, 504)}</div>
+<div class="pic">${img('crew', 'Uniformed Reliable Safe Packers crew member with wrapped furniture', 900, 504)}<div class="badge"><b>15+</b>years of experience</div></div>
 <div><span class="eyebrow">Why choose us</span><h2>Dehradun movers you can rely on</h2>
 <p>We are a local Dehradun company with our own office at Sewla Khurd. You deal directly with us, not a call centre.</p>
 <ul class="checks"><li>${ico('check')}<span><b>Trained crew.</b> Experienced packers, loaders and drivers.</span></li>
@@ -221,7 +227,7 @@ const img = (n, alt, w, h, lazy = true) => `<img src="/assets/img/opt/${n}.webp"
 <li>${ico('check')}<span><b>Fixed, clear quote.</b> No hidden charges on the day.</span></li>
 <li>${ico('check')}<span><b>Local knowledge.</b> We know Dehradun lanes, hill roads and society rules.</span></li>
 <li>${ico('check')}<span><b>Support at every step.</b> Call or WhatsApp anytime.</span></li></ul>
-<a class="btn btn-cta" href="/about.html">About us</a></div></div></section>
+<a class="btn btn-cta" href="about.html">About us</a></div></div></section>
 
 <section class="sec"><div class="wrap"><div class="sec-head center"><span class="eyebrow">How it works</span><h2>Moving made simple in 4 steps</h2></div>
 <ol class="steps"><li><h3>Call or fill form</h3><p>Tell us what and where you are moving.</p></li><li><h3>Free survey and quote</h3><p>We assess your goods and give a fixed price.</p></li><li><h3>Packing and loading</h3><p>Our crew packs, labels and loads carefully.</p></li><li><h3>Delivery and setup</h3><p>We unload, place items and help you settle in.</p></li></ol></div></section>
@@ -244,7 +250,7 @@ emit('services.html', {
   priority: 0.9,
   schema: [crumbSchema([['Home', 'index.html'], ['Services', 'services.html']])],
   body: `${pageHero({ trail: [['Home', 'index.html'], ['Services', 'services.html']], h1: 'Our Packers & Movers Services in Dehradun', lead: 'Pick the service you need. Every move gets trained crew, quality packing and a clear quote.' })}
-<section class="sec"><div class="wrap"><div class="grid c3">${SERVICES.map((s) => `<a class="card img" href="/${svcPath(s)}">${img(s.img, s.imgAlt, 800, 533)}<div class="cb"><h3>${e(s.nav)}</h3><p>${e(s.short)}</p><span class="more">Learn more &rarr;</span></div></a>`).join('')}</div></div></section>
+<section class="sec"><div class="wrap"><div class="grid c3">${SERVICES.map((s) => `<a class="card img" href="${svcPath(s)}"><div class="ph">${img(s.img, s.imgAlt, 800, 533)}<span class="tag">${ico(s.icon)}</span></div><div class="cb"><h3>${e(s.nav)}</h3><p>${e(s.short)}</p><span class="more">Learn more &rarr;</span></div></a>`).join('')}</div></div></section>
 <section class="sec soft" id="quote-sec"><div class="wrap" style="max-width:720px">${qform({ full: true, title: 'Not sure which service? Ask us' })}</div></section>
 ${band()}`,
 });
@@ -256,7 +262,7 @@ for (const s of SERVICES) {
   const others = SERVICES.filter((x) => x.slug !== s.slug).map((x) => [x.nav, svcPath(x)]);
   const body = `${pageHero({ trail, h1: s.h1, lead: s.lead })}
 <section class="sec"><div class="wrap cols"><div class="prose">
-${img(s.img, s.imgAlt, 800, 450, false).replace('<img ', '<img style="border-radius:14px;margin-bottom:20px;width:100%;height:auto" ')}
+${img(s.img, s.imgAlt, 800, 450, false).replace('<img ', '<img class="lead-img" ')}
 <p>${e(s.lead)} ${e(s.slug === 'long-distance' ? 'We cover all major cities from Dehradun.' : 'Reliable Safe Packers & Movers serves all of Dehradun and nearby areas.')}</p>
 ${s.blocks.map((b) => `<h2>${e(b.h)}</h2>${b.p ? `<p>${e(b.p)}</p>` : ''}${b.ul ? `<ul class="checks">${b.ul.map((i) => `<li>${ico('check')}<span>${e(i)}</span></li>`).join('')}</ul>` : ''}`).join('')}
 <h2>Price: what decides your quote</h2>
@@ -291,7 +297,7 @@ for (const a of AREAS) {
 <section class="sec"><div class="wrap cols"><div class="prose">
 <h2>Moving in ${e(a.name)}</h2><p>${e(a.blurb)}</p>
 <h2>What to know about moves in ${e(a.name)}</h2><ul class="checks">${a.notes.map((n) => `<li>${ico('check')}<span>${e(n)}</span></li>`).join('')}</ul>
-<h2>Our services in ${e(a.name)}</h2><ul class="checks">${SERVICES.slice(0, 7).map((s) => `<li>${ico('check')}<span><a href="/${svcPath(s)}"><b>${e(s.nav)}</b></a>: ${e(s.short)}</span></li>`).join('')}</ul>
+<h2>Our services in ${e(a.name)}</h2><ul class="checks">${SERVICES.slice(0, 7).map((s) => `<li>${ico('check')}<span><a href="${svcPath(s)}"><b>${e(s.nav)}</b></a>: ${e(s.short)}</span></li>`).join('')}</ul>
 <h2>How we work</h2><p>Call or send the form. We confirm the pickup and drop address, ask about floors and lift access, and give a fixed quote. On the day the crew arrives on time with packing material, loads carefully and delivers to your new address.</p>
 <h2>Other areas we serve</h2>${chips(others)}
 <div style="margin-top:26px">${faqHtml(faqs)}</div>
@@ -358,11 +364,11 @@ ${band()}`,
     priority: 0.7,
     schema: [crumbSchema(trail)],
     body: `${pageHero({ trail, h1: 'About Reliable Safe Packers & Movers', lead: 'A Dehradun moving company focused on safe handling, honest pricing and on-time delivery.' })}
-<section class="sec"><div class="wrap split"><div>${img('home-2', 'Movers talking to a family before a house shifting', 900, 600, false)}</div>
+<section class="sec"><div class="wrap split"><div class="pic">${img('home-2', 'Movers talking to a family before a house shifting', 900, 600, false)}<div class="badge"><b>24/7</b>support line</div></div>
 <div><span class="eyebrow">Who we are</span><h2>Reliable, affordable moving in Dehradun</h2>
 <p>At Reliable Safe Packers and Movers, we provide reliable and affordable moving services in Dehradun. With 15+ years of experience and a team of skilled professionals, we handle your belongings with care from packing to transport, unloading and unpacking.</p>
 <p>We know moving is stressful, so we offer 24/7 support to assist you at every step. Whether you are relocating a home or an office, our goal is a smooth and hassle-free move.</p>
-<a class="btn btn-cta" href="/contact.html">Contact us</a></div></div></section>
+<a class="btn btn-cta" href="contact.html">Contact us</a></div></div></section>
 <section class="sec soft"><div class="wrap"><div class="grid c3">
 <div class="card"><div class="ci">${ico('shield')}</div><h3>Our mission</h3><p>To provide safe, reliable and cost-effective moving services, and make every move stress-free by handling each detail with care.</p></div>
 <div class="card"><div class="ci">${ico('route')}</div><h3>Our vision</h3><p>To be the most trusted moving company in Dehradun, known for dependable and affordable relocation.</p></div>
@@ -398,7 +404,7 @@ ${band()}`,
 emit('thank-you.html', {
   title: 'Thank You | Reliable Safe Packers & Movers', desc: 'We received your request and will call you shortly.', noindex: true, cur: '',
   body: `<section class="center-page"><div class="wrap" style="max-width:560px"><div class="big">${ico('check', '')}</div><h1>Thank you!</h1><p>We got your request. Our team will call you shortly with your free quote.</p><p>Need it urgently? Call us now.</p>
-<p><a class="btn btn-cta" href="tel:${S.phone}">${ico('phone')} Call ${S.phoneShow}</a> <a class="btn btn-wa" href="https://wa.me/${S.wa}" target="_blank" rel="noopener">${ico('wa')} WhatsApp</a></p><p><a href="/">Back to home</a></p></div></section>
+<p><a class="btn btn-cta" href="tel:${S.phone}">${ico('phone')} Call ${S.phoneShow}</a> <a class="btn btn-wa" href="https://wa.me/${S.wa}" target="_blank" rel="noopener">${ico('wa')} WhatsApp</a></p><p><a href="index.html">Back to home</a></p></div></section>
 <script>try{window.dataLayer=window.dataLayer||[];dataLayer.push({event:'lead_thank_you'});if(typeof gtag==='function')gtag('event','lead_thank_you');}catch(e){}</script>`,
 });
 emit('404.html', {

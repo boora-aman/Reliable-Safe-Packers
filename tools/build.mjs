@@ -8,6 +8,7 @@ import { SITE, SERVICES, AREAS, ROUTES, REVIEWS, HOME_FAQS } from './data.mjs';
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const S = SITE;
 const e = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+const MAP_SRC = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3445.418561265836!2d77.9832249755629!3d30.2821437748047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092bb9f451fc3b%3A0x92b55e1330b1a16d!2sReliable%20Safe%20Packers%20%26%20Movers!5e0!3m2!1sen!2sin!4v1792426141090!5m2!1sen!2sin';
 const pages = []; // {path, priority, index}
 
 /* ---------- icons ---------- */
@@ -239,6 +240,9 @@ const img = (n, alt, w, h, lazy = true) => `<img src="assets/img/opt/${n}.webp" 
 <section class="sec"><div class="wrap"><div class="sec-head center"><span class="eyebrow">Customer reviews</span><h2>What our customers say</h2></div>${reviewCards()}</div></section>
 
 <section class="sec soft"><div class="wrap" style="max-width:860px">${faqHtml(faqs)}</div></section>
+<section class="sec"><div class="wrap split"><div><span class="eyebrow">Visit us</span><h2>Our Dehradun office</h2><address class="addr"><p>${ico('pin')} ${e(S.street)}, ${S.city} (U.K.) ${S.zip}</p><p>${ico('phone')} <a href="tel:${S.phone}">${S.phoneShow}</a></p><p>${ico('clock')} ${e(S.hours)}</p></address>
+<a class="btn btn-cta" href="https://www.google.com/maps/search/?api=1&query=Reliable+Safe+Packers+%26+Movers+Dehradun" target="_blank" rel="noopener">${ico('pin')} Get directions</a></div>
+<div class="map"><iframe title="Reliable Safe Packers & Movers location map" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen src="${MAP_SRC}"></iframe></div></div></section>
 ${band()}`,
   });
 }
@@ -347,7 +351,7 @@ ${band()}`,
 <section class="sec"><div class="wrap">
 <div class="split"><div><span class="eyebrow">Our office</span><h2>Dehradun Office</h2><address class="addr"><p>${ico('pin')} ${e(S.street)}, ${S.city} (U.K.), ${S.zip}</p><p>${ico('phone')} <a href="tel:${S.phone}">${S.phoneShow}</a></p><p>${ico('mail')} <a href="mailto:${S.email}">${S.email}</a></p><p>${ico('clock')} ${e(S.hours)}</p></address>
 <a class="btn btn-cta" href="https://www.google.com/maps/search/?api=1&query=Reliable+Safe+Packers+%26+Movers+Dehradun" target="_blank" rel="noopener">${ico('pin')} Open in Google Maps</a></div>
-<div class="map"><iframe title="Reliable Safe Packers & Movers location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3871.6096593390835!2d77.9832249755629!3d30.2821437748047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092bb9f451fc3b%3A0x92b55e1330b1a16d!2sReliable%20Safe%20Packers%20%26%20Movers!5e1!3m2!1sen!2sin!4v1734193217146!5m2!1sen!2sin"></iframe></div></div></div></section>
+<div class="map"><iframe title="Reliable Safe Packers & Movers location map" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="${MAP_SRC}"></iframe></div></div></div></section>
 <section class="sec soft"><div class="wrap"><div class="sec-head"><h2>Localities in Dehradun</h2><p>Select your area for local details.</p></div>${chips(AREAS.map((a) => [a.name, areaPath(a)]))}</div></section>
 <section class="sec" id="routes"><div class="wrap"><div class="sec-head"><h2>Nearby cities</h2></div>${chips(ROUTES.filter((r) => r.group === 'near').map((r) => [`Dehradun to ${r.city}`, routePath(r)]))}
 <div class="sec-head" style="margin-top:30px"><h2>Intercity routes across India</h2><p>Household, office, car and bike relocation in both directions.</p></div>${chips(ROUTES.filter((r) => r.group === 'far').map((r) => [`Dehradun to ${r.city}`, routePath(r)]))}</div></section>
@@ -394,7 +398,7 @@ ${band()}`,
 <a class="card" href="https://wa.me/${S.wa}?text=${encodeURIComponent('Hi, I need a moving quote.')}" target="_blank" rel="noopener"><div class="ci">${ico('wa')}</div><h3>WhatsApp</h3><p>Send photos of your goods for a faster quote.</p><span class="more">Chat now</span></a>
 <a class="card" href="mailto:${S.email}"><div class="ci">${ico('mail')}</div><h3>Email</h3><p>${S.email}</p><span class="more">Send email</span></a>
 <div class="card"><div class="ci">${ico('pin')}</div><h3>Office</h3><address class="addr"><p>${e(S.street)}, ${S.city} (U.K.) ${S.zip}</p></address><p>${e(S.hours)}</p></div></div>
-<h2 style="margin-top:28px">Find us</h2><div class="map"><iframe title="Reliable Safe Packers & Movers map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3871.6096593390835!2d77.9832249755629!3d30.2821437748047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39092bb9f451fc3b%3A0x92b55e1330b1a16d!2sReliable%20Safe%20Packers%20%26%20Movers!5e1!3m2!1sen!2sin!4v1734193217146!5m2!1sen!2sin"></iframe></div>
+<h2 style="margin-top:28px">Find us</h2><div class="map"><iframe title="Reliable Safe Packers & Movers map" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="${MAP_SRC}"></iframe></div>
 <div style="margin-top:26px">${faqHtml(faqs)}</div></div>
 <aside class="side">${qform({ full: true, title: 'Send Us a Message', sub: 'We call you back fast' })}</aside></div></section>`,
   });

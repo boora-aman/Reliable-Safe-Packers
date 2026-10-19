@@ -3,4 +3,4 @@ Allow: /
 Disallow: /api/
 Disallow: /thank-you.html
 
-Sitemap: https://reliablesafepackers.com/sitemap.xml
+Sitemap: https://www.reliablesafepackers.in/sitemap.xml

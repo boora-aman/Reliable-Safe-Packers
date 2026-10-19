@@ -1,7 +1,7 @@
 // Content for every generated page. Edit here, then run: node tools/build.mjs
 
 export const SITE = {
-  url: 'https://reliablesafepackers.com',
+  url: 'https://www.reliablesafepackers.in',
   name: 'Reliable Safe Packers & Movers',
   phone: '+918755722118',
   phoneShow: '87557 22118',

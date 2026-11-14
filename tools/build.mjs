@@ -147,7 +147,7 @@ function footer() {
 <a class="q" href="#quote">${ico('tag')}Free Quote</a>
 </div>
 <a class="fab" href="https://wa.me/${S.wa}?text=${encodeURIComponent('Hi, I need a moving quote.')}" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">${ico('wa')}</a>
-<script src="assets/js/site.js" defer></script>`;
+<script src="assets/js/site.js?v=ads-outbound-1" defer></script>`;
 }
 
 const SERVICE_OPTS = ['House Shifting', 'Office Relocation', 'Local Shifting', 'Long Distance Move', 'Car Transport', 'Bike Transport', 'Packing Only', 'Warehouse / Storage', 'Other'];

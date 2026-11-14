@@ -20,7 +20,7 @@ This rewrites all `.html`, `sitemap.xml`, `robots.txt`. Commit the output.
 Never commit the webhook URL.
 
 ## Ad tracking
-Form sends utm_* / gclid to Slack. Thank-you page (`/thank-you.html`) fires `lead_thank_you`; call/WhatsApp taps fire `call_click` / `whatsapp_click` via dataLayer/gtag. The shared page head in `tools/build.mjs` installs Google Ads tag `AW-18520925590`. A Google Ads conversion action needs its own conversion event or label.
+Form sends utm_* / gclid to Slack. Thank-you page (`/thank-you.html`) fires `lead_thank_you`; call/WhatsApp taps fire `call_click` / `whatsapp_click` via dataLayer/gtag. The shared page head in `tools/build.mjs` installs Google Ads tag `AW-18520925590`. WhatsApp links report the separate Google Ads Outbound click action; phone taps do not report that action. A completed quote needs its own conversion label.
 
 ## Test locally
 Open `index.html` directly in the browser (all links are relative, works from file://), or:

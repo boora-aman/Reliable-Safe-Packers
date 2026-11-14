@@ -70,9 +70,18 @@
     } catch (e) {}
   }
   d.addEventListener('click', function (e) {
-    var a = e.target.closest('a[href^="tel:"],a[href*="wa.me"]');
-    if (!a) return;
-    fire(a.href.indexOf('tel:') === 0 ? 'call_click' : 'whatsapp_click', { page: location.pathname });
+    var a = e.target.closest('a[href]');
+    if (!a || e.defaultPrevented) return;
+    if (a.protocol === 'tel:') {
+      fire('call_click', { page: location.pathname });
+      return;
+    }
+    if (a.protocol !== 'https:' || a.hostname !== 'wa.me') return;
+    fire('whatsapp_click', { page: location.pathname });
+    // WhatsApp opens in a new tab. Keep native navigation and send only the action ID.
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'conversion', { send_to: 'AW-18520925590/vZ9sCP2l0LcdEJbLu_9E' });
+    }
   });
 
   /* ---- quote forms ---- */

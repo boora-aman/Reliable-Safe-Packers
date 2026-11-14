@@ -75,6 +75,14 @@ function head({ title, desc, path, noindex = false, schema = [], ogImage = 'asse
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
 <link rel="stylesheet" href="assets/css/site.css">${preload}
 ${schema.map((o) => `<script type="application/ld+json">${JSON.stringify(o)}</script>`).join('\n')}
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-18520925590"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'AW-18520925590');
+</script>
 </head>`;
 }
 
